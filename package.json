@@ -1,0 +1,31 @@
+{
+  "name": "flixNet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev":"nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GSG-G11/flixNet.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GSG-G11/flixNet/issues"
+  },
+  "homepage": "https://github.com/GSG-G11/flixNet#readme",
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
+  },
+  "dependencies": {
+    "express": "^4.17.3",
+    "helmet": "^5.0.2"
+  }
+}
