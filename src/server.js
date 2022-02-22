@@ -8,7 +8,7 @@ const port = 4000;
 
 router.get('/', (req, res) => {
   res.send('its working');
-});
+})
 
 app.use('/', router);
 

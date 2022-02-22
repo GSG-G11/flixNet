@@ -10,9 +10,10 @@ router.use(express.static(filePath));
 router.get('/home', (req, res) => {
   res.sendFile(path.join(__dirname, '..', '..', 'public', 'html', 'home.html'));
 });
-router.get('/search', (req, res) => {
-  console.log(req.query['movie-name']);// git the data from the url
-  res.send({ data: 'test' });
+router.post('/search', (req, res) => {
+  // console.log(req.query['movie-name']);// git the data from the url
+  console.log(req.body);
+  res.send({ testback: 'test' });
 });
 
 module.exports = router;
