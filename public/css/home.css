@@ -296,3 +296,16 @@ body {
   background-color: #a70911;
 
 }
+
+.not-found{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  background-color: #000000;
+  color: red;
+  font-size: 50px;
+  font-weight: bold;
+  height: 100vh;
+
+}
