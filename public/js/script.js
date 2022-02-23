@@ -67,8 +67,7 @@ getCards('upcoming');
 
 searchBtn.addEventListener('click', () => {
   const movieDescription = document.querySelector('.movie-decription');
-  movieDescription.remove();
-  loader.style.display = 'inline-block';
+  movieDescription && movieDescription.remove();
   const inputValue = searchInput.value;
   const data = { inputValue };
   const details = {
@@ -81,27 +80,37 @@ searchBtn.addEventListener('click', () => {
   fetch('/search', details)
     .then((res) => res.json())
     .then((res) => {
-      loader.style.display = 'none';
-      const {
-        original_title: title,
-        overview,
-        poster_path: moviePoster,
-      } = res.data;
-      const movieDescriptionSection = document.createElement('div');
-      const movieTitle = document.createElement('p');
-      const movieOverview = document.createElement('p');
+      if (res.error) {
+        heroSection.innerHTML = '';
+        const errorMessage = document.createElement('p');
+        errorMessage.classList.add('error-message');
+        errorMessage.innerText = `Try Again , ${res.error}`;
+        heroSection.style.backgroundImage = 'none';
+        heroSection.appendChild(errorMessage);
+      } else {
+        heroSection.innerHTML = '';
+        heroSection.style.backgroundImage = 'none';
+        const {
+          original_title: title,
+          overview,
+          poster_path: moviePoster,
+        } = res.data;
+        const movieDescriptionSection = document.createElement('div');
+        const movieTitle = document.createElement('p');
+        const movieOverview = document.createElement('p');
 
-      movieDescriptionSection.classList.add('movie-decription');
-      movieTitle.classList.add('movie-title');
-      movieOverview.classList.add('movie-overview');
+        movieDescriptionSection.classList.add('movie-decription');
+        movieTitle.classList.add('movie-title');
+        movieOverview.classList.add('movie-overview');
 
-      movieTitle.innerText = title;
-      movieOverview.innerText = overview;
+        movieTitle.innerText = title;
+        movieOverview.innerText = overview;
 
-      movieDescriptionSection.appendChild(movieTitle);
-      movieDescriptionSection.appendChild(movieOverview);
-      heroSection.appendChild(movieDescriptionSection);
-      heroSection.style.backgroundImage = `linear-gradient(270deg, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 37.27%), url("https://image.tmdb.org/t/p/w500${moviePoster}")`;
+        movieDescriptionSection.appendChild(movieTitle);
+        movieDescriptionSection.appendChild(movieOverview);
+        heroSection.appendChild(movieDescriptionSection);
+        heroSection.style.backgroundImage = `linear-gradient(270deg, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 37.27%), url("https://image.tmdb.org/t/p/w500${moviePoster}")`;
+      }
     });
 });
 // you can access the input value from >>data.inputValue>>
