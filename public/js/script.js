@@ -3,7 +3,6 @@
 const searchBtn = document.querySelector('.search-button');
 const searchInput = document.querySelector('.search-input');
 const heroSection = document.querySelector('.hero-section');
-const loader = document.querySelector('.lds-spinner');
 const cardsSectionsContainer = document.querySelector('.first-fetch-result');
 
 const getCards = (category) => {
@@ -29,9 +28,6 @@ const getCards = (category) => {
 
       data.forEach((ele) => {
         const { poster_path, title, vote_average } = ele;
-        console.log(poster_path);
-        console.log(title);
-        console.log(vote_average);
 
         const card = document.createElement('div');
         card.classList = 'card';
@@ -50,15 +46,9 @@ const getCards = (category) => {
         card.appendChild(rate);
         titleSec.innerText = title;
         card.appendChild(titleSec);
-        console.log(card);
         resultChild.append(card);
-        console.log(resultChild);
         cardsSectionsContainer.appendChild(resultChild);
-        console.log(cardsSectionsContainer);
       });
-      console.log('date sheuld be below ....');
-      console.log(data.results);
-      console.log(' after the data ........');
     });
 };
 getCards('top_rated');
