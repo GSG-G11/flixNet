@@ -4,6 +4,7 @@ const searchBtn = document.querySelector('.search-button');
 const searchInput = document.querySelector('.search-input');
 const heroSection = document.querySelector('.hero-section');
 const loader = document.querySelector('.lds-spinner');
+const cardsSectionsContainer = document.querySelector('.first-fetch-result');
 
 const getCards = (category) => {
   const cardsDetails = {
@@ -15,7 +16,45 @@ const getCards = (category) => {
   };
   fetch('/cards', cardsDetails)
     .then((response) => response.json())
+    .then((data) => data.results)
     .then((data) => {
+      const resultChildTitle = document.createElement('h2');
+      resultChildTitle.classList = 'section-title';
+      resultChildTitle.innerText = category.replace('_', ' ');
+      cardsSectionsContainer.appendChild(resultChildTitle);
+
+      const resultChild = document.createElement('div');
+      resultChild.classList = 'first-fetch-result-child';
+
+      data.forEach((ele) => {
+        const { poster_path, title, vote_average } = ele;
+        console.log(poster_path);
+        console.log(title);
+        console.log(vote_average);
+
+        const card = document.createElement('div');
+        card.classList = 'card';
+
+        const image = document.createElement('img');
+
+        const rate = document.createElement('h4');
+        rate.classList = 'rate';
+
+        const titleSec = document.createElement('h3');
+        titleSec.classList = 'title';
+
+        image.src = `https://image.tmdb.org/t/p/w500${poster_path}`;
+        card.appendChild(image);
+        rate.innerText = `${vote_average}/10`;
+        card.appendChild(rate);
+        titleSec.innerText = title;
+        card.appendChild(titleSec);
+        console.log(card);
+        resultChild.append(card);
+        console.log(resultChild);
+        cardsSectionsContainer.appendChild(resultChild);
+        console.log(cardsSectionsContainer);
+      });
       console.log('date sheuld be below ....');
       console.log(data.results);
       console.log(' after the data ........');

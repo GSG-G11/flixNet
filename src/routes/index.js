@@ -17,7 +17,7 @@ router.post('/cards', (req, res) => {
   console.log(req.body);
   const { category } = req.body;
   fetch(`https://api.themoviedb.org/3/movie/${category}?api_key=ca43d42a77d5f7641cca48352f415f5b`)
-    .then((response) => response.json())
+    .then((resp) => resp.json())
     .then((data) => {
       console.log(data);
       return res.json(data);
