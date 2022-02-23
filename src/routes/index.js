@@ -9,13 +9,9 @@ const filePath = path.join(__dirname, '..', '..', 'public');
 
 router.use(express.static(filePath));
 
-router
-  .get('/home', (req, res) => {
-    res.sendFile(
-      path.join(__dirname, '..', '..', 'public', 'html', 'home.html')
-    );
-  })
- ;
+router.get('/home', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', '..', 'public', 'html', 'home.html'));
+});
 
 router.post('/cards', (req, res) => {
   console.log(req.body);
@@ -55,7 +51,7 @@ router.post('/search', (req, res) => {
       res.status(404).send({ error: error.message });
     });
 });
-router.use('*',(req,res)=>
+router.use('*', (req, res) =>
   res.sendFile(path.join(__dirname, '..', '..', 'public', 'html', '404.html'))
 );
 
