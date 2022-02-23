@@ -20,6 +20,7 @@ const getCards = (category) => {
     .then((data) => {
       const resultChildTitle = document.createElement('h2');
       resultChildTitle.classList = 'section-title';
+      resultChildTitle.id = category;
       resultChildTitle.innerText = category.replace('_', ' ');
       cardsSectionsContainer.appendChild(resultChildTitle);
 
