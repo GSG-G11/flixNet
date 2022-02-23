@@ -9,14 +9,20 @@ const filePath = path.join(__dirname, '..', '..', 'public');
 
 router.use(express.static(filePath));
 
-router.get('/home', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', '..', 'public', 'html', 'home.html'));
-});
+router
+  .get('/home', (req, res) => {
+    res.sendFile(
+      path.join(__dirname, '..', '..', 'public', 'html', 'home.html')
+    );
+  })
+ ;
 
 router.post('/cards', (req, res) => {
   console.log(req.body);
   const { category } = req.body;
-  fetch(`https://api.themoviedb.org/3/movie/${category}?api_key=ca43d42a77d5f7641cca48352f415f5b`)
+  fetch(
+    `https://api.themoviedb.org/3/movie/${category}?api_key=ca43d42a77d5f7641cca48352f415f5b`
+  )
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
@@ -38,7 +44,9 @@ router.post('/search', (req, res) => {
         console.log(movieId);
         //  secoung fetch to get the data from another api using the  id which we get thrrough
         // the first api
-        fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=ca43d42a77d5f7641cca48352f415f5b`)
+        fetch(
+          `https://api.themoviedb.org/3/movie/${movieId}?api_key=ca43d42a77d5f7641cca48352f415f5b`
+        )
           .then((result) => result.json())
           .then((moviedata) => res.send({ data: moviedata })); // to send the data to front
       }
@@ -47,5 +55,8 @@ router.post('/search', (req, res) => {
       res.status(404).send({ error: error.message });
     });
 });
+router.use('*',(req,res)=>
+  res.sendFile(path.join(__dirname, '..', '..', 'public', 'html', '404.html'))
+);
 
 module.exports = router;
