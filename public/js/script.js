@@ -5,6 +5,26 @@ const searchInput = document.querySelector('.search-input');
 const heroSection = document.querySelector('.hero-section');
 const loader = document.querySelector('.lds-spinner');
 
+const getCards = (category) => {
+  const cardsDetails = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ category: `${category}` }),
+  };
+  fetch('/cards', cardsDetails)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('date sheuld be below ....');
+      console.log(data.results);
+      console.log(' after the data ........');
+    });
+};
+getCards('top_rated');
+getCards('popular');
+getCards('upcoming');
+
 searchBtn.addEventListener('click', () => {
   const movieDescription = document.querySelector('.movie-decription');
   movieDescription.remove();
@@ -24,7 +44,7 @@ searchBtn.addEventListener('click', () => {
       loader.style.display = 'none';
       const {
         original_title: title,
-        overview: overview,
+        overview,
         poster_path: moviePoster,
       } = res.data;
       const movieDescriptionSection = document.createElement('div');

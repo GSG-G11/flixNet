@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const fetch = require('node-fetch');
+const { response } = require('express');
 
 const router = express.Router();
 
@@ -11,6 +12,18 @@ router.use(express.static(filePath));
 router.get('/home', (req, res) => {
   res.sendFile(path.join(__dirname, '..', '..', 'public', 'html', 'home.html'));
 });
+
+router.post('/cards', (req, res) => {
+  console.log(req.body);
+  const { category } = req.body;
+  fetch(`https://api.themoviedb.org/3/movie/${category}?api_key=ca43d42a77d5f7641cca48352f415f5b`)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      return res.json(data);
+    });
+});
+
 router.post('/search', (req, res) => {
   console.log(req.body.inputValue);
   const moviename = req.body.inputValue;
