@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const fetch = require('node-fetch');
 const { response } = require('express');
+const { cardHandleAI } = require('../controllers/index');
 
 const router = express.Router();
 
@@ -13,12 +14,7 @@ router.get('/home', (req, res) => {
   res.sendFile(path.join(__dirname, '..', '..', 'public', 'html', 'home.html'));
 });
 
-router.post('/cards', (req, res) => {
-  const { category } = req.body;
-  fetch(`https://api.themoviedb.org/3/movie/${category}?api_key=ca43d42a77d5f7641cca48352f415f5b`)
-    .then((resp) => resp.json())
-    .then((data) => res.json(data));
-});
+router.post('/cards', cardHandleAI);
 
 router.post('/search', (req, res) => {
   const moviename = req.body.inputValue;
